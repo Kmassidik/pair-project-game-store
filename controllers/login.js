@@ -1,6 +1,4 @@
 const { User } = require('../models/index');
-const session = require('express-session'); 
-
 class Login {
     static getLogin(req, res) {
         res.render('login', { msg: "" })

@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      UserDetail.belongsTo(models.User,{foreignKey:"UserId"})
     }
   }
   UserDetail.init({
@@ -23,5 +24,13 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'UserDetail',
   });
+
+  UserDetail.beforeCreate((data, opt)=>{
+    data.fname = ""
+    data.lname = ""
+    data.age = 0
+    data.address = ""
+  })
+  
   return UserDetail;
 };

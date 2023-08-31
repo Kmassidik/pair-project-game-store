@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.hasOne(models.UserDetail,{foreignKey:"UserId"})
     }
 
     static hashPassword(password) {
@@ -105,8 +106,10 @@ module.exports = (sequelize, DataTypes) => {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: user.email,
-      subject: 'Welcome to our application',
-      text: `Hello ${user.username}, welcome to our application!`
+      subject: 'Welcome to Game Store application',
+      text: `Hello ${user.username}, welcome to our application!
+      Hope you can buy all games in our store,
+      and dont forget to give a review for the game you bought`
     };
   
     transporter.sendMail(mailOptions, (error, info) => {

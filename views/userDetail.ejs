@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/userDetail" method="post">
+        username: <br><input type="text" value="<%= data.username %>" name="username"><br>
+        email: <br><input type="email" value="<%= data.email %>" name="email"><br>
+        role: <br><input type="text" value="<%= data.role %>" name="role"><br>
+        fname: <br><input type="text" value="<%= data.UserDetail.fname %>" name="fname"><br>
+        lname: <br><input type="text" value="<%= data.UserDetail.lname %>" name="lname"><br>
+        age: <br><input type="number" value="<%= data.UserDetail.age %>" name="age"><br>
+        address: <br><textarea type="text" name="address"><%= data.UserDetail.address %></textarea><br>
+        <button type="submit">update</button>
+        <a href="/home">cancel</a>
+    </form>
+</body>
+</html>

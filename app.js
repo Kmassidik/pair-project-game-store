@@ -4,7 +4,8 @@ require('dotenv').config();
 
 const { Register } = require('./controllers/register')
 const { Login } = require('./controllers/login')
-const { Logout } = require('./controllers/logout')
+const { Logout } = require('./controllers/logout');
+const { DataUserDetail } = require('./controllers/userdetail');
 
 const app = express()
 const port = 3000
@@ -31,6 +32,9 @@ app.post('/register',Register.postRegister)
 
 app.get('/home',Login.home)
 app.get('/logout',Logout.logout)
+
+app.get('/userDetail',DataUserDetail.getUserDetail)
+app.post('/userDetail',DataUserDetail.postUserDetail)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
