@@ -17,7 +17,7 @@ module.exports = {
     data.forEach((element) => {
       element.createdAt = element.updatedAt = new Date();
     });
-    return queryInterface.bulkInsert("Products", data);
+    return queryInterface.bulkInsert("GameStores", data);
   },
 
   down(queryInterface, Sequelize) {
@@ -27,6 +27,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    return queryInterface.bulkDelete("Products", null,{});
+    return queryInterface.bulkDelete("GameStores", null,{});
   },
 };
