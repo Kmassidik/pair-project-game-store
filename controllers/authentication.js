@@ -1,3 +1,5 @@
+const { GameStore, User, Transaction, Profile } = require("../models/index");
+
 class AuthenticationUser {
     static getLogin(req, res) {
         res.render('auth/login', { msg: "" })

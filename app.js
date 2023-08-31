@@ -2,7 +2,8 @@ const express = require("express");
 const session = require("express-session");
 require("dotenv").config();
 const path = require("path");
-const auth = require('./routes/auth');
+const router = require("./routes/product");
+const auth = require("./routes/auth");
 
 const app = express();
 const port = 3000;
@@ -19,8 +20,12 @@ app.use(
   })
 );
 
-app.use(auth)
+app.use(auth);
+app.use(router);
 
+app.get('/',(req,res)=>{
+  res.redirect('/products')
+})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

@@ -1,4 +1,4 @@
-const { Product, User, Transaction, UserDetail } = require("../models/index");
+const { GameStore, User, Transaction, Profile } = require("../models/index");
 const formatNumber = require("../helper/formattedNumber");
 
 class Controller {
