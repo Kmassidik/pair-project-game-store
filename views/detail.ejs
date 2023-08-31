@@ -69,6 +69,14 @@
                 padding: 10px 0;
               " />
         </form>
+        <h4 class="text-center">Scan Me</h4>
+        <div class="container d-flex justify-content-center mb-4">
+          <% if (typeof qrCodeImageError !== 'undefined') { %>
+            <p>Error generating QR code: <%= qrCodeImageError.message %></p>
+          <% } else if (qrCodeImage) { %>
+            <img src="<%= qrCodeImage %>" alt="QR Code">
+          <% } %>
+        </div>
         <form action="/get-comments/<%= data.id %>" method="post">
           <div class="form-floating">
             <textarea class="form-control" name="comments" id="floatingTextarea2" style="height: 100px"></textarea>
@@ -81,14 +89,14 @@
             ">Submit</button>
           </div>
         </form>
-        
       </div>
     </div>
-
-  </div>
+   
+    
+    
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
     crossorigin="anonymous"></script>
 </body>
 
-</html>
+</html>`

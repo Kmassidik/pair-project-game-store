@@ -46,29 +46,62 @@ class Controller {
         res.send(err);
       });
   }
+  // static detail(req, res) {
+  //   let temp = {}
+  //   GameStore.findByPk(req.params.id)
+  //     .then((game) => {
+  //       temp = game
+  //       return Review.findAll({
+  //         include:[{
+  //           model:User
+  //         },
+  //         {
+  //           model:GameStore
+  //         }
+  //       ]
+  //       })
+  //     })
+  //     .then(review=>{
+  //       // res.send(review)
+  //        res.render("detail", { data:temp, formatNumber, review});
+  //     })
+  //     .catch((err) => {
+  //       res.send(err);
+  //     });
+  // }
   static detail(req, res) {
-    let temp = {}
+    let temp = {};
     GameStore.findByPk(req.params.id)
       .then((game) => {
-        temp = game
+        temp = game;
         return Review.findAll({
-          include:[{
-            model:User
-          },
-          {
-            model:GameStore
-          }
-        ]
-        })
+          include: [
+            {
+              model: User,
+            },
+            {
+              model: GameStore,
+            },
+          ],
+        });
       })
-      .then(review=>{
-        // res.send(review)
-         res.render("detail", { data:temp, formatNumber, review});
+      .then((review) => {
+        // Generate QR code for the game store
+        temp.generateQRCode((error, qrCodeImage) => {
+          if (error) {
+            console.error('Error generating QR code:', error);
+            res.render('detail', { data: temp, formatNumber, review, qrCodeImageError: error });
+          } else {
+            // Render the detail template with the retrieved data and QR code image
+            res.render('detail', { data: temp, formatNumber, review, qrCodeImage });
+          }
+        });
       })
       .catch((err) => {
+        console.log(err);
         res.send(err);
       });
-  }
+}
   static invoice(req, res) {
     const { userId } = req.session;
     let profile;
