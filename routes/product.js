@@ -17,5 +17,6 @@ routeProduct.post("/checkout", PaymentController.checkoutItems);
 
 routeProduct.get("/userDetail", DataUserDetail.getUserDetail);
 routeProduct.post("/userDetail", DataUserDetail.postUserDetail);
+routeProduct.get("/transactions", Controller.transactions);
 
 module.exports = routeProduct;
