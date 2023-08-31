@@ -3,5 +3,5 @@ npx sequelize-cli model:generate --name UserDetail --attributes fname:string,lna
 
 npx sequelize-cli migration:generate --name add-unique-username
 npx sequelize-cli migration:generate --name add-unique-email
-npx sequelize-cli migration:generate --name add-fk-UserDetail
+npx sequelize-cli migration:generate --name add-fk-transactionId
 
