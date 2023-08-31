@@ -1,37 +1,41 @@
-const express = require('express')
-const session = require('express-session');
-require('dotenv').config(); 
+const express = require("express");
+const session = require("express-session");
+require("dotenv").config();
 
-const { Register } = require('./controllers/register')
-const { Login } = require('./controllers/login')
-const { Logout } = require('./controllers/logout')
+const { Register } = require("./controllers/register");
+const { Login } = require("./controllers/login");
+const { Logout } = require("./controllers/logout");
+const Controller = require("./controllers/controller");
 
-const app = express()
-const port = 3000
+const app = express();
+const port = 3000;
 
-app.set('view engine', 'ejs') 
-app.use(express.urlencoded({extended: true}))
+app.set("view engine", "ejs");
+app.use(express.urlencoded({ extended: true }));
 
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-}));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+app.get("/login", Login.getLogin);
+app.post("/login", Login.postLogin);
 
-app.get('/login',Login.getLogin)
-app.post('/login',Login.postLogin)
+app.get("/register", Register.getRegister);
+app.post("/register", Register.postRegister);
 
-app.get('/register',Register.getRegister)
-app.post('/register',Register.postRegister)
+app.get("/home", Login.home);
+app.get("/logout", Logout.logout);
 
-app.get('/home',Login.home)
-app.get('/logout',Logout.logout)
+app.get("/product", Controller.Product);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+  console.log(`Example app listening on port ${port}`);
+});

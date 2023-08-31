@@ -1,10 +1,8 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-const bcrypt = require('bcrypt');
-const nodemailer = require('nodemailer');
-require('dotenv').config(); 
+"use strict";
+const { Model } = require("sequelize");
+const bcrypt = require("bcrypt");
+const nodemailer = require("nodemailer");
+require("dotenv").config();
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -15,110 +13,114 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.belongsTo(models.Transaction);
+      User.belongsTo(models.Review);
     }
 
     static hashPassword(password) {
       const saltRounds = 10;
       const hash = bcrypt.hashSync(password, saltRounds);
-      return hash
+      return hash;
     }
 
-    checkPassword(password){
-      let temp = bcrypt.compareSync(password, this.password); 
+    checkPassword(password) {
+      let temp = bcrypt.compareSync(password, this.password);
       if (!temp) {
-        throw "your password is wrong"
+        throw "your password is wrong";
       }
     }
   }
-  User.init({
-    username: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: {
-          msg: "username must be fill !!"
+  User.init(
+    {
+      username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "username must be fill !!",
+          },
+          notNull: {
+            msg: "username must be fill !!",
+          },
+          len: {
+            args: [3, 20],
+            msg: "Username must be between 3 and 20 characters.",
+          },
+          is: {
+            args: /^[a-zA-Z0-9_-]+$/,
+            msg: "Username can only contain letters, numbers, underscores, and hyphens.",
+          },
         },
-        notNull: {
-          msg: "username must be fill !!"
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Password must not be empty.",
+          },
+          notNull: {
+            msg: "Password must not be null.",
+          },
+          len: {
+            args: [4, 20],
+            msg: "Password must be between 4 and 20 characters.",
+          },
         },
-        len: {
-          args: [3, 20],
-          msg: "Username must be between 3 and 20 characters."
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Email must not be empty.",
+          },
+          notNull: {
+            msg: "Email must not be null.",
+          },
+          isEmail: {
+            msg: "Invalid email format.",
+          },
         },
-        is: {
-          args: /^[a-zA-Z0-9_-]+$/,
-          msg: "Username can only contain letters, numbers, underscores, and hyphens."
-        },
-      }
+      },
+      role: DataTypes.STRING,
     },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: {
-          msg: "Password must not be empty."
-        },
-        notNull: {
-          msg: "Password must not be null."
-        },
-        len: {
-          args: [4, 20],
-          msg: "Password must be between 4 and 20 characters."
-        },
-      }
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: {
-          msg: "Email must not be empty."
-        },
-        notNull: {
-          msg: "Email must not be null."
-        },
-        isEmail: {
-          msg: "Invalid email format."
-        }
-      }
-    },
-    role: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'User',
-  });
+    {
+      sequelize,
+      modelName: "User",
+    }
+  );
 
   User.beforeCreate((user, opt) => {
-    user.role = "user"
-    user.password = User.hashPassword(user.password)
-  })
+    user.role = "user";
+    user.password = User.hashPassword(user.password);
+  });
 
   User.afterCreate((user, opt) => {
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: "gmail",
       auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD
-      }
+        pass: process.env.EMAIL_PASSWORD,
+      },
     });
-  
+
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: user.email,
-      subject: 'Welcome to our application',
-      text: `Hello ${user.username}, welcome to our application!`
+      subject: "Welcome to our application",
+      text: `Hello ${user.username}, welcome to our application!`,
     };
-  
+
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-        console.error('Error sending email:', error);
+        console.error("Error sending email:", error);
         throw new Error(`Error sending email: ${error}`);
       } else {
-        console.log('Email sent:', info.response);
+        console.log("Email sent:", info.response);
       }
     });
   });
-  
 
   return User;
 };
