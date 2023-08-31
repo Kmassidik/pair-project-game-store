@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       User.hasOne(models.UserDetail,{foreignKey:"UserId"})
-      User.belongsTo(models.Transaction);
-      User.belongsTo(models.Review);
+      // User.hasMany(models.Transaction);
+      // User.hasMany(models.Review);
     }
 
     static hashPassword(password) {

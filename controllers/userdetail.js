@@ -38,7 +38,7 @@ class DataUserDetail {
         }
         )
         .then(() => {
-            res.redirect('/userDetail')
+            res.redirect('auth/userDetail')
         }).catch((err) => {
             res.send(err)
         });

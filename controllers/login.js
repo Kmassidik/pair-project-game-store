@@ -1,7 +1,7 @@
 const { User } = require('../models/index');
 class Login {
     static getLogin(req, res) {
-        res.render('login', { msg: "" })
+        res.render('auth/login', { msg: "" })
     }
     
     static postLogin(req, res) {
@@ -27,7 +27,7 @@ class Login {
         .then(() => {
             req.session.username = temp.username;
             req.session.userId = temp.id;
-            res.redirect("/home")
+            res.redirect('/home')
         })
         .catch((err) => {
             console.log(err);
@@ -37,7 +37,7 @@ class Login {
 
     static home(req, res) {
         if (req.session.username && req.session.userId) {
-            res.render('home', { username: req.session.username, userId: req.session.userId });
+            res.redirect('/products')
         } else {
             res.redirect('/login');
         }
