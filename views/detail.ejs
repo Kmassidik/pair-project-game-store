@@ -26,20 +26,17 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="/">Game Store</a></li>
           <li class="breadcrumb-item active" aria-current="page">
-            <%= data.name %>
+            <%= data.nameProduct %>
           </li>
         </ol>
       </nav>
       <div class="d-flex gap-4">
         <div class="bg-white p-4 rounded-2 w-75 mb-3">
-          <h3><%= data.name %></h3>
+          <h3><%= data.nameProduct %></h3>
           <div class="d-flex gap-2 align-items-center">
-            <img
-              width="16"
-              src="https://d1785e74lyxkqq.cloudfront.net/_next/static/v2/b/b389ffb3531caf7ef87136de528d466f.svg"
-              alt=""
-            />
-            <p class="mb-0 fw-bold text-secondary"><%= data.price %></p>
+            <p class="mb-0 fw-bold text-secondary">
+              <%= formatNumber(data.price) %>
+            </p>
           </div>
           <img
             style="max-height: 400px"
@@ -68,14 +65,14 @@
               <span class="text-black">/ Items</span>
             </h4>
           </div>
-          <form action="/package/booking/<%= data.id %>" method="post">
+          <form action="/package/chart/<%= data.id %>" method="post">
             <div class="mb-3">
               <label class="form-label">Quantity</label>
               <input type="number" name="quantity" class="form-control" />
             </div>
             <input
               type="submit"
-              value="Booking"
+              value="Add Chart"
               class="btn w-100 mb-5"
               style="
                 background-color: rgba(255, 94, 31, 1);

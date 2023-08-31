@@ -3,15 +3,15 @@ const formatNumber = require("../helper/formattedNumber");
 
 class Controller {
   static product(req, res) {
-    let isLogin = false
+    let isLogin = false;
 
     if (req.session.username && req.session.userId) {
-      isLogin = true
-   }
+      isLogin = true;
+    }
     const { userId } = req.session;
     Product.findAll()
       .then((data) => {
-        res.render("home", { data, formatNumber , isLogin });
+        res.render("home", { data, formatNumber, isLogin });
         // res.render("product", { data, formatNumber, userId });
       })
       .catch((err) => {
@@ -37,8 +37,9 @@ class Controller {
         return Product.findByPk(req.params.id);
       })
       .then((pdct) => {
+        res.send(pdct);
         if (profile) {
-          res.render("invoice", { pdct });
+          res.send("invoice", { pdct });
         } else res.redirect("/profile?error=Profile First");
       })
       .catch((err) => res.send(err));
