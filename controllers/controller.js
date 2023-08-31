@@ -1,4 +1,4 @@
-const { Product } = require("../models");
+const { Product,transaction } = require("../models");
 const formatNumber = require("../helper/formattedNumber");
 
 class Controller {
@@ -6,7 +6,7 @@ class Controller {
     const { userId } = req.session;
     Product.findAll()
       .then((data) => {
-        res.render("product", { data, formatNumber, userId });
+        res.render("home", { data, formatNumber, userId });
       })
       .catch((err) => {
         res.send(err);
