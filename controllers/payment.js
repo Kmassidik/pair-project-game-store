@@ -1,4 +1,4 @@
-const { GameStore, Invoice } = require("../models");
+const {Transaction, GameStore, Invoice } = require("../models");
 const formatNumber = require("../helper/formattedNumber");
 
 class PaymentController {
@@ -14,6 +14,37 @@ class PaymentController {
         console.log(err);
         res.send(err);
       });
+  }
+  static checkoutItems(req,res){
+    let UserId = req.session.userId
+    let data = req.session.checkout
+
+    Transaction.create({
+      statusPayment: "Success",
+      GameStoreId: data.GameStoreId,
+      UserId: UserId
+    })
+    .then(() => {
+      res.redirect('/')
+    }).catch((err) => {
+      res.send(err)
+    });
+  }
+
+  static cancelItem(req,res){
+    let UserId = req.session.userId
+    let {GameStoreId} = req.session.checkout
+
+    Transaction.create({
+      statusPayment: "Cancel",
+      GameStoreId: GameStoreId,
+      UserId: UserId
+    })
+    .then(() => {
+      res.redirect('/')
+    }).catch((err) => {
+      res.send(err)
+    });
   }
 }
 module.exports = PaymentController;

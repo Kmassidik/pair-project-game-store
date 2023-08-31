@@ -12,6 +12,8 @@ routeProduct.post("/products/:id/invoice", Controller.postInvoice);
 routeProduct.get("/products/checkout/:id", PaymentController.showCheckout);
 
 routeProduct.get("/payment", PaymentController.showCheckout);
+routeProduct.get("/cancelItem", PaymentController.cancelItem);
+routeProduct.post("/checkout", PaymentController.checkoutItems);
 
 routeProduct.get("/userDetail", DataUserDetail.getUserDetail);
 routeProduct.post("/userDetail", DataUserDetail.postUserDetail);
