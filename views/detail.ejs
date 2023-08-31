@@ -26,13 +26,13 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="/">Game Store</a></li>
           <li class="breadcrumb-item active" aria-current="page">
-            <%= data.nameProduct %>
+            <%= data.name %>
           </li>
         </ol>
       </nav>
       <div class="d-flex gap-4">
         <div class="bg-white p-4 rounded-2 w-75 mb-3">
-          <h3><%= data.nameProduct %></h3>
+          <h3><%= data.name %></h3>
           <div class="d-flex gap-2 align-items-center">
             <p class="mb-0 fw-bold text-secondary">
               <%= formatNumber(data.price) %>
@@ -46,7 +46,7 @@
             alt=""
           />
           <h4>Description</h4>
-          <p><%= data.about %></p>
+          <p><%= data.description %></p>
         </div>
         <div
           class="bg-white p-4 rounded-2 mb-3"

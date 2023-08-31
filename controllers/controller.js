@@ -1,15 +1,21 @@
-const { Product, User, Transaction, UserDetail } = require("../models/index");
+const {
+  GameStore,
+  Invoice,
+  Profile,
+  Transaction,
+  User,
+} = require("../models/index");
 const formatNumber = require("../helper/formattedNumber");
 
 class Controller {
-  static product(req, res) {
+  static GamesStore(req, res) {
     let isLogin = false;
 
     if (req.session.username && req.session.userId) {
       isLogin = true;
     }
     const { userId } = req.session;
-    Product.findAll()
+    GameStore.findAll()
       .then((data) => {
         res.render("home", { data, formatNumber, isLogin });
         // res.render("product", { data, formatNumber, userId });
@@ -20,7 +26,7 @@ class Controller {
       });
   }
   static detail(req, res) {
-    Product.findByPk(req.params.id)
+    GameStore.findByPk(req.params.id)
       .then((data) => {
         res.render("detail", { data, formatNumber });
       })

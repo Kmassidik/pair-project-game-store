@@ -2,7 +2,7 @@ const routeProduct = require("express").Router();
 const Controller = require("../controllers/controller");
 const { DataUserDetail } = require("../controllers/userdetail");
 
-routeProduct.get("/products", Controller.product);
+routeProduct.get("/products", Controller.GamesStore);
 routeProduct.get("/package/detail/:id", Controller.detail);
 
 routeProduct.post("/package/chart/:id", Controller.postInvoice);
