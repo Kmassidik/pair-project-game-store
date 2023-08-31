@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       User.hasOne(models.Profile,{foreignKey:"UserId"})
       User.hasMany(models.Transaction);
+      User.hasMany(models.Review);
     }
 
     static hashPassword(password) {

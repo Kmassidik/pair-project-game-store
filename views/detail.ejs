@@ -1,94 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Detail</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
-      crossorigin="anonymous"
-    />
-  </head>
-  <body>
-    <style>
-      body {
-        background-color: rgba(242, 243, 243, 1);
-      }
-      a {
-        text-decoration: none;
-        color: black;
-      }
-    </style>
-    <div class="container mt-4">
-      <nav aria-label="breadcrumb" class="ps-3">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/">Game Store</a></li>
-          <li class="breadcrumb-item active" aria-current="page">
-            <%= data.name %>
-          </li>
-        </ol>
-      </nav>
-      <div class="d-flex gap-4">
-        <div class="bg-white p-4 rounded-2 w-75 mb-3">
-          <h3><%= data.name %></h3>
-          <div class="d-flex gap-2 align-items-center">
-            <p class="mb-0 fw-bold text-secondary">
-              <%= formatNumber(data.price) %>
-            </p>
-          </div>
-          <img
-            style="max-height: 400px"
-            class="object-fit-cover rounded-3 mt-4 mb-3"
-            width="100%"
-            src="<%= data.image  %>"
-            alt=""
-          />
-          <h4>Description</h4>
-          <p><%= data.description %></p>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Detail</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+</head>
+
+<body>
+  <style>
+    body {
+      background-color: rgba(242, 243, 243, 1);
+    }
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+  </style>
+  <div class="container mt-4">
+    <nav aria-label="breadcrumb" class="ps-3">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Game Store</a></li>
+        <li class="breadcrumb-item active" aria-current="page">
+          <%= data.name %>
+        </li>
+      </ol>
+    </nav>
+    <div class="d-flex gap-4">
+      <div class="bg-white p-4 rounded-2 w-75 mb-3">
+        <h3>
+          <%= data.name %>
+        </h3>
+        <div class="d-flex gap-2 align-items-center">
+          <p class="mb-0 fw-bold text-secondary">
+            <%= formatNumber(data.price) %>
+          </p>
         </div>
-        <div
-          class="bg-white p-4 rounded-2 mb-3"
-          style="width: 25%; height: fit-content"
-        >
-          <div style="margin-bottom: 50px">
-            <h4>SALARY</h4>
-            <p
-              class="text-decoration-line-through mb-0"
-              style="color: rgba(205, 208, 209, 1)"
-            >
-              <%= formatNumber(data.price + 100000) %>
-            </p>
-            <h4 style="color: rgba(255, 94, 31, 1)">
-              <%= formatNumber(data.price) %>
+        <img style="max-height: 400px" class="object-fit-cover rounded-3 mt-4 mb-3" width="100%"
+          src="<%= data.image  %>" alt="" />
+        <h4>Description</h4>
+        <p>
+          <%= data.description %>
+        </p>
+      </div>
+      <div class="bg-white p-4 rounded-2 mb-3" style="width: 25%; height: fit-content">
+        <div style="margin-bottom: 50px">
+          <h4>SALARY</h4>
+          <p class="text-decoration-line-through mb-0" style="color: rgba(205, 208, 209, 1)">
+            <%= formatNumber(data.price + 100000) %>
+          </p>
+          <h4 style="color: rgba(255, 94, 31, 1)">
+            <%= formatNumber(data.price) %>
               <span class="text-black">/ Items</span>
-            </h4>
+          </h4>
+        </div>
+        <form action="/products/chart/<%= data.id %>" method="post">
+          <div class="mb-3">
+            <label class="form-label">Quantity</label>
+            <input type="number" name="quantity" class="form-control" />
           </div>
-          <form action="/products/chart/<%= data.id %>" method="post">
-            <div class="mb-3">
-              <label class="form-label">Quantity</label>
-              <input type="number" name="quantity" class="form-control" />
-            </div>
-            <input
-              type="submit"
-              value="Add Chart"
-              class="btn w-100 mb-5"
-              style="
+          <input type="submit" value="Add Chart" class="btn w-100 mb-5" style="
                 background-color: rgba(255, 94, 31, 1);
                 font-weight: 500;
                 color: white;
                 padding: 10px 0;
-              "
-            />
-          </form>
+              " />
+        </form>
+        <div class="form-floating">
+          <textarea class="form-control" name="comments" id="floatingTextarea2" style="height: 100px"></textarea>
+          <label for="floatingTextarea2">review this game</label>
+          <a href="/get-comments/<%= data.id %>" class="btn w-50 mt-3" style="
+            background-color: rgba(255, 94, 31, 1);
+            font-weight: 500;
+            color: white;
+            padding: 10px 0;
+          ">Submit</a>
         </div>
       </div>
     </div>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>

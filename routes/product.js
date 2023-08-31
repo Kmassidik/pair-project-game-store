@@ -1,4 +1,5 @@
 const routeProduct = require("express").Router();
+const { Comment } = require("../controllers/comment");
 const Controller = require("../controllers/controller");
 const PaymentController = require("../controllers/payment");
 const { DataUserDetail } = require("../controllers/userdetail");
@@ -14,6 +15,7 @@ routeProduct.get("/products/checkout/:id", PaymentController.showCheckout);
 routeProduct.get("/payment", PaymentController.showCheckout);
 routeProduct.get("/cancelItem", PaymentController.cancelItem);
 routeProduct.post("/checkout", PaymentController.checkoutItems);
+routeProduct.get("/get-comments/:id", Comment.updateComment);
 
 routeProduct.get("/userDetail", DataUserDetail.getUserDetail);
 routeProduct.post("/userDetail", DataUserDetail.postUserDetail);
