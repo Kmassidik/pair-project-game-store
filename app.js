@@ -1,6 +1,7 @@
 const express = require("express");
 const session = require("express-session");
 require("dotenv").config();
+const qrcode = require('qrcode');
 
 const { Register } = require("./controllers/register");
 const { Login } = require("./controllers/login");
@@ -37,8 +38,20 @@ app.get("/logout", Logout.logout);
 
 app.get("/product", Controller.Product);
 
-app.get('/userDetail',DataUserDetail.getUserDetail)
-app.post('/userDetail',DataUserDetail.postUserDetail)
+app.get('/userDetail', DataUserDetail.getUserDetail)
+app.post('/userDetail', DataUserDetail.postUserDetail)
+
+app.get('/generateQR', async (req, res) => {
+  const url = 'http://localhost:3000/package/detail/48';
+
+  try {
+    const qrCodeImage = await qrcode.toDataURL(url);
+    res.send(`<img style="width:500px; height:500px;" src="${qrCodeImage}" alt="QR Code" />`);
+  } catch (error) {
+    console.error('Error generating QR code:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

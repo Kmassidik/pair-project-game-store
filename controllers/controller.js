@@ -6,8 +6,8 @@ class Controller {
     const { userId } = req.session;
     Product.findAll()
       .then((data) => {
-        res.send(data)
-        // res.render("product", { data, formatNumber, userId });
+        // res.send(data)
+        res.render("product", { data, formatNumber, userId });
       })
       .catch((err) => {
         console.log(err);
