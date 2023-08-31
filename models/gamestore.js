@@ -15,7 +15,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   GameStore.init({
     name: DataTypes.STRING,
-    location: DataTypes.STRING
+    image: DataTypes.STRING,
+    description: DataTypes.STRING,
+    price: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'GameStore',

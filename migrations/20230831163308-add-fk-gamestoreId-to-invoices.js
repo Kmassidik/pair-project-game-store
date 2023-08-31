@@ -1,32 +1,27 @@
-'use strict';
+"use strict";
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  up(queryInterface, Sequelize) {
+   up(queryInterface, Sequelize) {
     /**
      * Add altering commands here.
      *
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-    return queryInterface.changeColumn('Users', 'email', {
-      type: Sequelize.STRING,
-      allowNull: false,
-      unique: true
+    return queryInterface.addColumn("Invoices", "GameStoreId", {
+      type: Sequelize.INTEGER,
+      references: { model: "GameStores", key: "id" },
     });
   },
 
-  down(queryInterface, Sequelize) {
+   down(queryInterface, Sequelize) {
     /**
      * Add reverting commands here.
      *
      * Example:
      * await queryInterface.dropTable('users');
      */
-    return queryInterface.changeColumn('Users', 'email', {
-      type: Sequelize.STRING,
-      allowNull: true,
-      unique: false
-    });
-  }
+    return queryInterface.removeColumn("Invoices", "GameStoreId", {});
+  },
 };
