@@ -69,16 +69,19 @@
                 padding: 10px 0;
               " />
         </form>
-        <div class="form-floating">
-          <textarea class="form-control" name="comments" id="floatingTextarea2" style="height: 100px"></textarea>
-          <label for="floatingTextarea2">review this game</label>
-          <a href="/get-comments/<%= data.id %>" class="btn w-50 mt-3" style="
-            background-color: rgba(255, 94, 31, 1);
-            font-weight: 500;
-            color: white;
-            padding: 10px 0;
-          ">Submit</a>
-        </div>
+        <form action="/get-comments/<%= data.id %>" method="post">
+          <div class="form-floating">
+            <textarea class="form-control" name="comments" id="floatingTextarea2" style="height: 100px"></textarea>
+            <label for="floatingTextarea2">review this game</label>
+            <button type="submit" class="btn w-50 mt-3" style="
+              background-color: rgba(255, 94, 31, 1);
+              font-weight: 500;
+              color: white;
+              padding: 10px 0;
+            ">Submit</button>
+          </div>
+        </form>
+        
       </div>
     </div>
 

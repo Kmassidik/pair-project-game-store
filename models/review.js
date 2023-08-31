@@ -12,13 +12,13 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Review.belongsTo(models.User)
-      Review.belongsTo(models.GameStore)
+      Review.belongsTo(models.GameStore,{foreignKey:"GameStoreId"})
     }
   }
   Review.init({
     comments: DataTypes.STRING,
     UserId:DataTypes.INTEGER,
-    GameStoresId:DataTypes.INTEGER
+    GameStoreId:DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Review',

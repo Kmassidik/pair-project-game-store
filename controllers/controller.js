@@ -4,50 +4,66 @@ const {
   Profile,
   Transaction,
   User,
+  Review
 } = require("../models/index");
 const formatNumber = require("../helper/formattedNumber");
 const { Op } = require("sequelize");
+const formatedDate = require("../helper/formatedDate");
 
 class Controller {
   static GamesStore(req, res) {
-    let isLogin = false
-    let { search, sort } = req.query
-    let option = {}
+    let isLogin = false;
+    let { search, sort } = req.query;
+    let option = {};
     if (req.session.username && req.session.userId) {
-        isLogin = true
+      isLogin = true;
     }
 
     if (search) {
-        option = {
-            where: {
-                name: {
-                    [Op.iLike]: `%${search}%`
-                }
-            }
-        }
+      option = {
+        where: {
+          name: {
+            [Op.iLike]: `%${search}%`,
+          },
+        },
+      };
     }
 
     if (sort) {
-        option = {
-            order: [[`${sort}`, "asc"]]
-        }
+      option = {
+        order: [[`${sort}`, "asc"]],
+      };
     }
 
     GameStore.findAll(option)
-        .then((data) => {
-          // res.send(data)
-            res.render("home", { data, formatNumber, isLogin });
-            // res.render("product", { data, formatNumber, userId });
-        })
-        .catch((err) => {
-            console.log(err);
-            res.send(err);
-        });
+      .then((data) => {
+        // res.send(data)
+        res.render("home", { data, formatNumber, isLogin });
+        // res.render("product", { data, formatNumber, userId });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.send(err);
+      });
   }
   static detail(req, res) {
+    let temp = {}
     GameStore.findByPk(req.params.id)
-      .then((data) => {
-        res.render("detail", { data, formatNumber });
+      .then((game) => {
+        temp = game
+        return Review.findAll({
+          include:[{
+            model:User
+          },
+          {
+            model:GameStore
+          }
+        ]
+        })
+      })
+      .then(review=>{
+        // res.send(review)
+         res.render("detail", { data:temp, formatNumber, review});
       })
       .catch((err) => {
         res.send(err);
@@ -89,7 +105,17 @@ class Controller {
       })
       .catch((err) => {
         console.log(err);
-        res.send(err)
+        res.send(err);
+      });
+  }
+  static transactions(req, res) {
+    Transaction.findAll()
+      .then((transactions) => {
+        res.render("transaction", { transactions });
+      })
+      .catch((err) => {
+        console.error(err);
+        res.send(err);
       });
   }
 }
