@@ -42,23 +42,37 @@
             <% if (!isLogin) { %>
               <a class="btn btn-primary" href="/login">Login</a>
               <a class="btn btn-secondary" href="/register">Register</a>
-            <% } %>
+              <% } else { %>
+                <a href="/userDetail">My profile</a>
+                <span>|</span>
+                <a href="/logout">Logout</a>
+                <% } %>
           </div>
         </div>
       </div>
     </nav>
     <div class="container">
+      <div class="mb-4">
+        <form action="/products" method="get">
+          <input type="text" name="search" placeholder="  find the game in here">
+          <button type="submit" class="btn btn-outline-secondary me-4">Find</button>
+          <span></span>
+          <b>sort by:</b>
+          <b><a href="/products?sort=name">Name</a></b> ||
+          <b><a href="/products?sort=price">Pirce</a></b>
+        </form>
+      </div>
       <div class="d-flex flex-wrap gap-5">
         <% data.forEach(el => { %>
         <div class="card" style="width: 18rem">
-          <a href="/package/detail/<%= el.id  %>">
+          <a href="/products/detail/<%= el.id  %>">
             <img
               style="height: 150px"
               src="<%= el.image  %>"
               class="card-img-top img-fluid"
             />
             <div class="card-body">
-              <h5 class="card-title mb-0"><%= el.nameProduct %></h5>
+              <h5 class="card-title mb-0"><%= el.name %></h5>
               <p class="card-text"><%= formatNumber(el.price) %></p>
             </div>
           </a>

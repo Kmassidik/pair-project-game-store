@@ -70,12 +70,12 @@ class AuthenticationUser {
                 })
             })
             .then((user) => {
-                return UserDetail.create({
+                return Profile.create({
                     UserId: user.id
                 })
             })
             .then(() => {
-                res.send("berhasil")
+                res.redirect('/login')
             })
             .catch((err) => {
                 if (err.name == "SequelizeValidationError") {
@@ -84,6 +84,7 @@ class AuthenticationUser {
                     });
                     res.render('auth/register', { err: tempErr })
                 } else {
+                    console.log(err);
                     res.send(err)
                 }
             });

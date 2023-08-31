@@ -10,10 +10,10 @@
         username: <br><input type="text" value="<%= data.username %>" name="username"><br>
         email: <br><input type="email" value="<%= data.email %>" name="email"><br>
         role: <br><input type="text" value="<%= data.role %>" name="role"><br>
-        fname: <br><input type="text" value="<%= data.UserDetail.fname %>" name="fname"><br>
-        lname: <br><input type="text" value="<%= data.UserDetail.lname %>" name="lname"><br>
-        age: <br><input type="number" value="<%= data.UserDetail.age %>" name="age"><br>
-        address: <br><textarea type="text" name="address"><%= data.UserDetail.address %></textarea><br>
+        first name: <br><input type="text" value="<%= data.Profile.firstname %>" name="fname"><br>
+        last name: <br><input type="text" value="<%= data.Profile.lastname %>" name="lname"><br>
+        Birth: <br><input type="date" value="<%= data.Profile.dateOfBirth %>" name="age"><br>
+        phone: <br><textarea type="text" name="address"><%= data.Profile.phoneNumber %></textarea><br>
         <button type="submit">update</button>
         <a href="/home">cancel</a>
     </form>

@@ -6,24 +6,43 @@ const {
   User,
 } = require("../models/index");
 const formatNumber = require("../helper/formattedNumber");
+const { Op } = require("sequelize");
 
 class Controller {
   static GamesStore(req, res) {
-    let isLogin = false;
-
+    let isLogin = false
+    let { search, sort } = req.query
+    let option = {}
     if (req.session.username && req.session.userId) {
-      isLogin = true;
+        isLogin = true
     }
-    const { userId } = req.session;
-    GameStore.findAll()
-      .then((data) => {
-        res.render("home", { data, formatNumber, isLogin });
-        // res.render("product", { data, formatNumber, userId });
-      })
-      .catch((err) => {
-        console.log(err);
-        res.send(err);
-      });
+
+    if (search) {
+        option = {
+            where: {
+                name: {
+                    [Op.iLike]: `%${search}%`
+                }
+            }
+        }
+    }
+
+    if (sort) {
+        option = {
+            order: [[`${sort}`, "asc"]]
+        }
+    }
+
+    GameStore.findAll(option)
+        .then((data) => {
+          // res.send(data)
+            res.render("home", { data, formatNumber, isLogin });
+            // res.render("product", { data, formatNumber, userId });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.send(err);
+        });
   }
   static detail(req, res) {
     GameStore.findByPk(req.params.id)
@@ -50,7 +69,6 @@ class Controller {
       })
       .catch((err) => res.send(err));
   }
-
   static postInvoice(req, res) {
     const { userId } = req.session;
     const { quantitys } = req.body;
