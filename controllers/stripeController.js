@@ -1,13 +1,12 @@
-const { Product, Transaction, Package } = require("../models");
-const formatNumber = require("../helpers/helper");
-
-// const DOMAIN = "http://localhost:3003/";
+const { Product, Transaction, GameStore, Invoice } = require("../models");
+const formatNumber = require("../helper/formattedNumber");
 
 class StripeController {
   static showCheckout(req, res) {
     let id = +req.params.id;
-    Booking.findByPk(id, { include: Package })
+    Invoice.findByPk(id, { include: GameStore })
       .then((data) => {
+        // res.send(data)
         req.session.checkout = data;
         res.render("checkout", { data, formatNumber });
       })

@@ -31,16 +31,16 @@
         <div class="d-flex justify-content-between mb-3">
           <h5>Order Date :</h5>
           <h5 class="fw-light">
-            <%= data.orderDate.toISOString().split("T")[0] %>
+            <%= data.createdAt.toISOString().split("T")[0] %>
           </h5>
         </div>
         <div class="d-flex justify-content-between mb-3">
           <h5>Product :</h5>
-          <h5 class="fw-light"><%= data.Product.name %></h5>
+          <h5 class="fw-light"><%= data.GameStore.name %></h5>
         </div>
         <div class="d-flex justify-content-between mb-3">
           <h5>Total Item :</h5>
-          <h5 class="fw-light"><%= data.Transaction.quantity %></h5>
+          <h5 class="fw-light"><%= data.quantity %></h5>
         </div>
 
         <div class="d-flex justify-content-between mb-5">

@@ -11,11 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Invoice.belongsTo(models.GameStore)
+      Invoice.belongsTo(models.User)
     }
   }
   Invoice.init({
     quantity: DataTypes.INTEGER,
-    totalPayment: DataTypes.INTEGER
+    totalPayment: DataTypes.INTEGER,
+    GameStoreId: DataTypes.INTEGER,
+    UserId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Invoice',

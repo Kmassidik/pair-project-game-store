@@ -71,23 +71,26 @@ class Controller {
   }
   static postInvoice(req, res) {
     const { userId } = req.session;
-    const { quantitys } = req.body;
+    const { quantity } = req.body;
     let product;
-    Product.findByPk(req.params.id)
-      .then((pkg) => {
-        product = pkg;
-        return Transaction.create({
-          quantity: +quantitys,
-          UserId: userId,
-          ProductId: +req.params.id,
-          orderDate: new Date(),
-          totalPayment: Transaction.price * quantitys,
+    GameStore.findByPk(req.params.id)
+      .then((result) => {
+        // res.send(result)
+        return Invoice.create({
+          quantity: +quantity,
+          UserId: 1, //sek mas
+          GameStoreId: +req.params.id,
+          totalPayment: result.price * quantity,
         });
       })
       .then((data) => {
-        res.redirect(`/product/invoice/checkout/${data.id}`);
+        // res.send(data)
+        res.redirect(`/products/checkout/${data.id}`);
       })
-      .catch((err) => res.send(err));
+      .catch((err) => {
+        console.log(err);
+        res.send(err)
+      });
   }
 }
 
