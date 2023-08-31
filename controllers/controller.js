@@ -8,13 +8,14 @@ const {
 } = require("../models/index");
 const formatNumber = require("../helper/formattedNumber");
 const { Op } = require("sequelize");
-const formatedDate = require("../helper/formatedDate");
 
 class Controller {
   static GamesStore(req, res) {
     let isLogin = false;
     let { search, sort } = req.query;
     let option = {};
+    let role = req.session.role
+    console.log(role);
     if (req.session.username && req.session.userId) {
       isLogin = true;
     }
@@ -38,7 +39,7 @@ class Controller {
     GameStore.findAll(option)
       .then((data) => {
         // res.send(data)
-        res.render("home", { data, formatNumber, isLogin });
+        res.render("home", { data, formatNumber, isLogin, role });
         // res.render("product", { data, formatNumber, userId });
       })
       .catch((err) => {
@@ -46,30 +47,13 @@ class Controller {
         res.send(err);
       });
   }
-  // static detail(req, res) {
-  //   let temp = {}
-  //   GameStore.findByPk(req.params.id)
-  //     .then((game) => {
-  //       temp = game
-  //       return Review.findAll({
-  //         include:[{
-  //           model:User
-  //         },
-  //         {
-  //           model:GameStore
-  //         }
-  //       ]
-  //       })
-  //     })
-  //     .then(review=>{
-  //       // res.send(review)
-  //        res.render("detail", { data:temp, formatNumber, review});
-  //     })
-  //     .catch((err) => {
-  //       res.send(err);
-  //     });
-  // }
   static detail(req, res) {
+    let isLogin = false
+
+    if (req.session.username && req.session.userId) {
+      isLogin = true
+    }
+
     let temp = {};
     GameStore.findByPk(req.params.id)
       .then((game) => {
@@ -90,10 +74,10 @@ class Controller {
         temp.generateQRCode((error, qrCodeImage) => {
           if (error) {
             console.error('Error generating QR code:', error);
-            res.render('detail', { data: temp, formatNumber, review, qrCodeImageError: error });
+            res.render('detail', { data: temp, formatNumber, review, qrCodeImageError: error, isLogin });
           } else {
             // Render the detail template with the retrieved data and QR code image
-            res.render('detail', { data: temp, formatNumber, review, qrCodeImage });
+            res.render('detail', { data: temp, formatNumber, review, qrCodeImage, isLogin });
           }
         });
       })
@@ -101,7 +85,7 @@ class Controller {
         console.log(err);
         res.send(err);
       });
-}
+  }
   static invoice(req, res) {
     const { userId } = req.session;
     let profile;

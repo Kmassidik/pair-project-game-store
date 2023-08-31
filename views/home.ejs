@@ -40,8 +40,8 @@
             </div>
           <div class="d-flex gap-2">
             <% if (!isLogin) { %>
-              <a class="btn btn-primary" href="/login">Login</a>
-              <a class="btn btn-secondary" href="/register">Register</a>
+              <a class="btn btn-outline-primary" href="/login">Login</a>
+              <a class="btn btn-outline-secondary" href="/register">Register</a>
               <% } else { %>
                 <a href="/userDetail">My profile</a>
                 <span>|</span>
@@ -60,7 +60,9 @@
           <b>sort by:</b>
           <b><a href="/products?sort=name">Name</a></b> ||
           <b><a href="/products?sort=price">Price</a></b> ||
-          <b><a href="/transactions">Transaction</a></b>
+          <% if (role == "admin") { %>
+            <b><a class="text-bg-warning" href="/transactions">Data Transaction</a></b>
+          <% } %>
         </form>
       </div>
       <div class="d-flex flex-wrap gap-5">

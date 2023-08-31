@@ -27,6 +27,7 @@ class AuthenticationUser {
             .then(() => {
                 req.session.username = temp.username;
                 req.session.userId = temp.id;
+                req.session.role = temp.role;
                 res.redirect('/home')
             })
             .catch((err) => {
