@@ -3,12 +3,12 @@ const session = require("express-session");
 require("dotenv").config();
 const qrcode = require("qrcode");
 const path = require("path");
+const router = require("./routes/product");
 
 const { Register } = require("./controllers/register");
 const { Login } = require("./controllers/login");
 const { Logout } = require("./controllers/logout");
-const Controller = require("./controllers/controller");
-const { DataUserDetail } = require("./controllers/userdetail");
+const { route } = require("./routes/product");
 
 const app = express();
 const port = 3000;
@@ -38,15 +38,7 @@ app.post("/register", Register.postRegister);
 app.get("/home", Login.home);
 app.get("/logout", Logout.logout);
 
-app.get("/products", Controller.product);
-app.get("/package/detail/:id", Controller.detail);
-
-app.post("/package/chart/:id", Controller.postInvoice);
-
-app.post("/products/:id/invoice", Controller.postInvoice);
-
-app.get("/userDetail", DataUserDetail.getUserDetail);
-app.post("/userDetail", DataUserDetail.postUserDetail);
+app.use(router);
 
 app.get("/generateQR", async (req, res) => {
   const url = "http://localhost:3000/package/detail/48";
