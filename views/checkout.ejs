@@ -51,8 +51,12 @@
             <%= formatNumber(data.totalPayment) %>
           </h5>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <a href="/cancelItem" type="submit" class="btn btn-primary">Cancel</a>
+        <% if (data.totalPayment > 0) { %>
+        <button type="submit" class="btn btn-primary">Pay</button>
+        <a href="/cancelItem" type="submit" class="btn btn-danger">Cancel</a>
+        <% } else { %>
+        <a href="/cancelItem" type="submit" class="btn btn-danger">Cancel</a>
+        <% } %>
       </form>
     </div>
     <script

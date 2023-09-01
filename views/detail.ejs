@@ -116,12 +116,23 @@
       <h3>Reviews</h3>
       <ul id="reviewList">
         <% review.forEach(function (item) { %>
-          <li>
-            <strong><%= item.User.username %>:</strong> <%= item.comments %>
+          <li style="list-style-type: none;">
+            <div class="d-flex">
+              <div class="me-3">
+                <!-- Tampilkan bintang penilaian di sini -->
+                <div class="rating" data-rating="<%= item.rating %>"></div>
+              </div>
+              <div>
+                <strong><%= item.User.username %>:</strong>
+                <p><%= item.comments %></p>
+              </div>
+            </div>
           </li>
+          <hr> 
         <% }); %>
       </ul>
     </div>
+    
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"

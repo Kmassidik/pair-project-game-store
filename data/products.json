@@ -50,7 +50,7 @@
   {
     "name": "Sudoku",
     "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam nostrum quidem consectetur dolore harum autem voluptatibus fugiat ipsa quasi. Vitae delectus numquam provident possimus. Voluptates nobis enim unde quis reiciendis!",
-    "image": "https://play-lh.googleusercontent.com/hYLElG0RAgn60XE6cfgsPPW_WjXoRzJKWHJ_x52qWYA6ECM70bq3x0vwwYiBhzLXdOIHCo-obdUTztPbskEn0K8_wBs=w480-h960-rw",
+    "image": "https://img.freepik.com/premium-vector/game-dominoes-is-shown-green-table_887258-9.jpg?w=1480",
     "price": 15000
   },
   {
@@ -140,25 +140,25 @@
   {
     "name": "GTA San Andreas",
     "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam nostrum quidem consectetur dolore harum autem voluptatibus fugiat ipsa quasi. Vitae delectus numquam provident possimus. Voluptates nobis enim unde quis reiciendis!",
-    "image": "https://play-lh.googleusercontent.com/hxBaaNV53NZWMR5G9NpS1a-W4GgZ3oOkw3c_c6K-eGqWiIYzH4aET5PM1aUtnrrm3Nk=w1052-h592-rw",
+    "image": "https://www.freepik.com/premium-ai-image/man-vr-with-gta-style-vibrant-energy-net-art-ai-generated_63551294.htm#page=2&query=gta&position=19&from_view=keyword&track=sph",
     "price": 40000
   },
   {
     "name": "Bubble Shooter",
     "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam nostrum quidem consectetur dolore harum autem voluptatibus fugiat ipsa quasi. Vitae delectus numquam provident possimus. Voluptates nobis enim unde quis reiciendis!",
-    "image": "https://play-lh.googleusercontent.com/XgMi1pNfC-svGpGswFTOlk3UEOoTXOxh_A5_G8Byz4e-Sq-YYz9HvB9BnKccJAb4Shg=w1052-h592-rw",
+    "image": "https://img.freepik.com/premium-vector/item-buttons-set-vector-illustration-screen-bright-background-image-create-original-video-web-games-graphic-design-screen-savers_284645-1416.jpg?w=1380",
     "price": 15000
   },
   {
     "name": "Ludo King",
     "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam nostrum quidem consectetur dolore harum autem voluptatibus fugiat ipsa quasi. Vitae delectus numquam provident possimus. Voluptates nobis enim unde quis reiciendis!",
-    "image": "https://play-lh.googleusercontent.com/XgMi1pNfC-svGpGswFTOlk3UEOoTXOxh_A5_G8Byz4e-Sq-YYz9HvB9BnKccJAb4Shg=w1052-h592-rw",
+    "image": "https://img.freepik.com/premium-vector/board-games-ludo-collection_600323-50.jpg?w=1380",
     "price": 10000
   },
   {
     "name": "Temple Run 2",
     "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam nostrum quidem consectetur dolore harum autem voluptatibus fugiat ipsa quasi. Vitae delectus numquam provident possimus. Voluptates nobis enim unde quis reiciendis!",
-    "image": "https://play-lh.googleusercontent.com/jlGS5wJXG0E3MzOxgoUwF1R-RXM26yG3UjvBq6x6y7GJNh1pBX2Uzh8xYn3Dp3at7Tg=w1052-h592-rw",
+    "image": "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftemple-run-2.id.uptodown.com%2Fandroid&psig=AOvVaw0q3svfhaBMSTTpuZh82evk&ust=1693617360511000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCIiG88ueiIEDFQAAAAAdAAAAABAE",
     "price": 20000
   }
 ]

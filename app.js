@@ -23,9 +23,9 @@ app.use(
 app.use(auth);
 app.use(router);
 
-app.get('/',(req,res)=>{
-  res.redirect('/products')
-})
+app.get("/", (req, res) => {
+  res.redirect("/products");
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

@@ -4,7 +4,7 @@ const {
   Profile,
   Transaction,
   User,
-  Review
+  Review,
 } = require("../models/index");
 const formatNumber = require("../helper/formattedNumber");
 const { Op } = require("sequelize");
@@ -14,7 +14,7 @@ class Controller {
     let isLogin = false;
     let { search, sort } = req.query;
     let option = {};
-    let role = req.session.role
+    let role = req.session.role;
     console.log(role);
     if (req.session.username && req.session.userId) {
       isLogin = true;
@@ -47,6 +47,11 @@ class Controller {
       });
   }
   static detail(req, res) {
+    let isLogin = false;
+
+    if (req.session.username && req.session.userId) {
+      isLogin = true;
+    }
     let temp = {};
     GameStore.findByPk(req.params.id)
       .then((game) => {
@@ -74,6 +79,7 @@ class Controller {
               formatNumber,
               review,
               qrCodeImageError: error,
+              isLogin,
             });
           } else {
             res.render("detail", {
@@ -81,6 +87,7 @@ class Controller {
               formatNumber,
               review,
               qrCodeImage,
+              isLogin,
             });
           }
         });
