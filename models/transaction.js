@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
     get formattedDate() {
-      // return this.dateOfEvent.toISOString().slice(0, 10);
-      return this.createdAt.toISOString().slice(0, 10);
+      let newDate = new Date(this.createdAt)
+      return newDate.toISOString().split('T')[0];
     }
   }
   Transaction.init(

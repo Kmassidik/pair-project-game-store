@@ -111,7 +111,17 @@
         </form>
       </div>
     </div>
-
+    
+    <div class="bg-white p-4 rounded-2 w-70">
+      <h3>Reviews</h3>
+      <ul id="reviewList">
+        <% review.forEach(function (item) { %>
+          <li>
+            <strong><%= item.User.username %>:</strong> <%= item.comments %>
+          </li>
+        <% }); %>
+      </ul>
+    </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"

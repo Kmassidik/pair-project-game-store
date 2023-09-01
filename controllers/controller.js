@@ -40,7 +40,6 @@ class Controller {
       .then((data) => {
         // res.send(data)
         res.render("home", { data, formatNumber, isLogin, role });
-        // res.render("product", { data, formatNumber, userId });
       })
       .catch((err) => {
         console.log(err);
@@ -48,17 +47,14 @@ class Controller {
       });
   }
   static detail(req, res) {
-    let isLogin = false
-
-    if (req.session.username && req.session.userId) {
-      isLogin = true
-    }
-
     let temp = {};
     GameStore.findByPk(req.params.id)
       .then((game) => {
         temp = game;
         return Review.findAll({
+          where: {
+            GameStoreId: req.params.id,
+          },
           include: [
             {
               model: User,
@@ -70,14 +66,22 @@ class Controller {
         });
       })
       .then((review) => {
-        // Generate QR code for the game store
         temp.generateQRCode((error, qrCodeImage) => {
           if (error) {
-            console.error('Error generating QR code:', error);
-            res.render('detail', { data: temp, formatNumber, review, qrCodeImageError: error, isLogin });
+            console.error("Error generating QR code:", error);
+            res.render("detail", {
+              data: temp,
+              formatNumber,
+              review,
+              qrCodeImageError: error,
+            });
           } else {
-            // Render the detail template with the retrieved data and QR code image
-            res.render('detail', { data: temp, formatNumber, review, qrCodeImage, isLogin });
+            res.render("detail", {
+              data: temp,
+              formatNumber,
+              review,
+              qrCodeImage,
+            });
           }
         });
       })

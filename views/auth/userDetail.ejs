@@ -3,19 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <title>Edit User Details</title>
+    <style>
+        body {
+            background-color: #f3f4f6;
+        }
+    </style>
 </head>
-<body>
-    <form action="/userDetail" method="post">
-        username: <br><input type="text" value="<%= data.username %>" name="username"><br>
-        email: <br><input type="email" value="<%= data.email %>" name="email"><br>
-        role: <br><input type="text" value="<%= data.role %>" name="role"><br>
-        first name: <br><input type="text" value="<%= data.Profile.firstname %>" name="fname"><br>
-        last name: <br><input type="text" value="<%= data.Profile.lastname %>" name="lname"><br>
-        Birth: <br><input type="date" value="<%= data.Profile.dateOfBirth %>" name="age"><br>
-        phone: <br><textarea type="text" name="address"><%= data.Profile.phoneNumber %></textarea><br>
-        <button type="submit">update</button>
-        <a href="/home">cancel</a>
-    </form>
+<body class="flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded shadow-md">
+        <form action="/userDetail" method="post">
+            <div class="mb-4">
+                <label for="username" class="block text-sm font-medium text-gray-700">Username:</label>
+                <input type="text" value="<%= data.username %>" name="username" class="mt-1 p-2 border rounded w-full">
+            </div>
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
+                <input type="email" value="<%= data.email %>" name="email" class="mt-1 p-2 border rounded w-full">
+            </div>
+            <div class="mb-4">
+                <label for="role" class="block text-sm font-medium text-gray-700">Role:</label>
+                <input type="text" value="<%= data.role %>" name="role" class="mt-1 p-2 border rounded w-full">
+            </div>
+            <div class="mb-4">
+                <label for="fname" class="block text-sm font-medium text-gray-700">First Name:</label>
+                <input type="text" value="<%= data.Profile.firstname %>" name="fname" class="mt-1 p-2 border rounded w-full">
+            </div>
+            <div class="mb-4">
+                <label for="lname" class="block text-sm font-medium text-gray-700">Last Name:</label>
+                <input type="text" value="<%= data.Profile.lastname %>" name="lname" class="mt-1 p-2 border rounded w-full">
+            </div>
+            <div class="mb-4">
+                <label for="age" class="block text-sm font-medium text-gray-700">Birth:</label>
+                <input type="date" value="<%= data.Profile.formatDateJob %>" name="dateOfBirth" class="mt-1 p-2 border rounded w-full">
+            </div>
+            <div class="mb-4">
+                <label for="address" class="block text-sm font-medium text-gray-700">Phone:</label>
+                <textarea name="phoneNumber" class="mt-1 p-2 border rounded w-full"><%= data.Profile.phoneNumber %></textarea>
+            </div>
+            <div class="flex">
+                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded mr-2 hover:bg-blue-600">Update</button>
+                <a href="/home" class="text-blue-500 hover:underline">Cancel</a>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

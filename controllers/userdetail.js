@@ -20,13 +20,15 @@ class DataUserDetail {
     }
     static postUserDetail(req, res) {
         let getId = req.session.userId
-        let { username, email,role,fname,lname,age,address} = req.body
+        // console.log(req.body);
+        // res.send(req.body)
+        let { username, email, role, fname, lname, dateOfBirth, phoneNumber } = req.body
 
         Profile.update({
             firstname: fname,
             lastname: lname,
-            age: age,
-            address: address
+            dateOfBirth: dateOfBirth,
+            phoneNumber: phoneNumber
         },
             {
                 where: {
@@ -35,12 +37,21 @@ class DataUserDetail {
             }
         )
             .then(() => {
-
                 return User.update({
                     username: username,
                     email: email,
+                    role: role
+                }, {
+                    where: {
+                        id: getId
+                    }
                 })
-            }).catch((err) => {
+            })
+            .then(() => {
+                res.redirect("/")
+            })
+            .catch((err) => {
+                console.log(err);
                 res.send(err)
             });
     }
