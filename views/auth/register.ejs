@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <title>Register Form</title>
+    <style>
+        body {
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded shadow-md">
+        <h1 class="text-2xl mb-4">Register</h1>
+        <form action="/register" method="post">
+            <input type="text" name="username" placeholder="Username" class="block w-full mb-2 p-2 border rounded">
+            <p class="text-red-500"><%= err.username %></p>
+            <input type="password" name="password" placeholder="Password" class="block w-full mb-2 p-2 border rounded">
+            <p class="text-red-500"><%= err.password %></p>
+            <input type="email" name="email" placeholder="Email" class="block w-full mb-2 p-2 border rounded">
+            <p class="text-red-500"><%= err.email %></p>
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">Register</button>
+            <a href="/login">login</a>
+        </form>
+    </div>
+</body>
+</html>

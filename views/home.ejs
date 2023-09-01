@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GameStore</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <style>
+      body {
+        background-color: rgba(242, 243, 243, 1);
+      }
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    </style>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 mb-4">
+      <div class="container">
+        <a class="navbar-brand" href="#"
+          ><img
+            class="img-fluid"
+            src="flaro-assets/logos/flaro-logo-black.svg"
+            alt=""
+        /></a>
+        <div class="collapse navbar-collapse me-5 justify-content-between">
+          <div class="collapse navbar-collapse me-5 justify-content-between">
+            <div style="width: 80%">
+              <marquee>
+                <strong>HELLO FROM HACKSTORE, OUR TEAM:</strong> 
+                <strong>BAHRUDIN YUSUF , KURNIA MASSIDIK</strong>
+                !<strong>Thanks for visit!, Happy Gaming</strong> !
+              </marquee>
+            </div>
+          <div class="d-flex gap-2">
+            <% if (!isLogin) { %>
+              <a class="btn btn-outline-primary" href="/login">Login</a>
+              <a class="btn btn-outline-secondary" href="/register">Register</a>
+              <% } else { %>
+                <a href="/userDetail">My profile</a>
+                <span>|</span>
+                <a href="/logout">Logout</a>
+                <% } %>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="mb-4">
+        <form action="/products" method="get">
+          <input type="text" name="search" placeholder="  find the game in here">
+          <button type="submit" class="btn btn-outline-secondary me-4">Find</button>
+          <span></span>
+          <b>sort by:</b>
+          <b><a href="/products?sort=name">Name</a></b> ||
+          <b><a href="/products?sort=price">Price</a></b> ||
+          <% if (role == "admin") { %>
+            <b><a class="text-bg-warning" href="/transactions">Data Transaction</a></b>
+          <% } %>
+        </form>
+      </div>
+      <div class="d-flex flex-wrap gap-5">
+        <% data.forEach(el => { %>
+        <div class="card" style="width: 18rem">
+          <a href="/products/detail/<%= el.id  %>">
+            <img
+              style="height: 150px"
+              src="<%= el.image  %>"
+              class="card-img-top img-fluid"
+            />
+            <div class="card-body">
+              <h5 class="card-title mb-0"><%= el.name %></h5>
+              <p class="card-text"><%= formatNumber(el.price) %></p>
+            </div>
+          </a>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

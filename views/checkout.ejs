@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GAME STORE</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <style>
+      body {
+        background-color: rgba(242, 243, 243, 1);
+      }
+
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    </style>
+    <div class="container mt-4">
+      <form
+        class="w-50 rounded-2 mx-auto p-4 bg-white text-center"
+        action="/checkout"
+        method="post"
+      >
+        <h1 class="mb-4">Invoice</h1>
+        <div class="d-flex justify-content-between mb-3">
+          <h5>Order Date :</h5>
+          <h5 class="fw-light">
+            <%= data.createdAt.toISOString().split("T")[0] %>
+          </h5>
+        </div>
+        <div class="d-flex justify-content-between mb-3">
+          <h5>Product :</h5>
+          <h5 class="fw-light"><%= data.GameStore.name %></h5>
+        </div>
+        <div class="d-flex justify-content-between mb-3">
+          <h5>Total Item :</h5>
+          <h5 class="fw-light"><%= data.quantity %></h5>
+        </div>
+
+        <div class="d-flex justify-content-between mb-5">
+          <h5>Total :</h5>
+          <h5 class="fw-light text-danger">
+            <%= formatNumber(data.totalPayment) %>
+          </h5>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="/cancelItem" type="submit" class="btn btn-primary">Cancel</a>
+      </form>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
